@@ -270,13 +270,13 @@ if not results.empty:
     st.markdown("#### Event-driven scenario selection")
 
     scenario_shocks = {
-        "Geopolitical": [8.0, 2.0, 10.0, 5.0],
-        "Macroeconomic": [6.0, 5.0, 8.0, 5.0],
-        "Credit Event": [12.0, 1.0, 9.0, 7.0],
-        "Corporate Earnings": [3.0, 1.0, 5.0, 2.0],
-        "Supply Chain": [9.0, 2.0, 7.0, 10.0],
-        "M&A": [4.0, 1.0, 6.0, 3.0],
-        "Other": [5.0, 2.0, 5.0, 3.0],
+        "Geopolitical": [8.0, 2.0, 10.0, 5.0, 12.0],
+        "Macroeconomic": [6.0, 5.0, 8.0, 5.0, 7.0],
+        "Credit Event": [12.0, 1.0, 9.0, 7.0, 15.0],
+        "Corporate Earnings": [3.0, 1.0, 5.0, 2.0, 6.0],
+        "Supply Chain": [9.0, 2.0, 7.0, 10.0, 11.0],
+        "M&A": [4.0, 1.0, 6.0, 3.0, 5.0],
+        "Other": [5.0, 2.0, 5.0, 3.0, 5.0],
     }
 
     
@@ -465,6 +465,54 @@ st.caption(
     "RiskLens prototype | Research and educational demonstration; "
     "not investment advice or a production credit-risk model."
 )
+
+# --- Real Market Data: NIFTY 50 ---
+import yfinance as yf
+
+st.header("Real Market Data: NIFTY 50")
+st.caption(
+    "Historical market data from Yahoo Finance. "
+    "Market movements do not establish causation by news articles."
+)
+
+if st.button("Fetch latest market data"):
+    try:
+        with st.spinner("Fetching NIFTY 50 historical data..."):
+            market_data = yf.Ticker("^NSEI").history(
+                period="1mo",
+                interval="1d"
+            )
+
+        if market_data.empty:
+            st.warning("No market data returned. Please try again later.")
+        else:
+            market_data = market_data.reset_index()
+            market_data["Daily Return (%)"] = (
+                market_data["Close"].pct_change() * 100
+            )
+
+            st.metric(
+                "Latest NIFTY 50 close",
+                f'{market_data["Close"].iloc[-1]:,.2f}'
+            )
+
+            st.line_chart(
+                market_data.set_index("Date")["Close"],
+                y_label="Closing index level"
+            )
+
+            st.line_chart(
+                market_data.set_index("Date")["Daily Return (%)"],
+                y_label="Daily return (%)"
+            )
+
+            st.dataframe(
+                market_data.tail(10),
+                use_container_width=True
+            )
+
+    except Exception as error:
+        st.error(f"Market data could not be loaded: {error}")
 
 
 

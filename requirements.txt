@@ -6,3 +6,4 @@ requests
 feedparser
 vaderSentiment
 scikit-learn
+yfinance
