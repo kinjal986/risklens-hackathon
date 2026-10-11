@@ -5,7 +5,7 @@ S&P Global & CRISIL Campus Hackathon 2026
 - Candidate: Kinjal Gupta
 - College: VIT Bhopal
 - College email: kinjal.23mip10052@vitbhopal.ac.in
-- Demo video: [To be added after recording](https://youtu.be/-1J-GBqnc8E)
+- Demo video: [ Live Demonstration Video](https://youtu.be/-1J-GBqnc8E)
 - Presentation: [`docs/presentation.pdf`](docs/presentation.pdf)
 - Architecture diagram: [`docs/architecture.png`](docs/architecture.png)
 
