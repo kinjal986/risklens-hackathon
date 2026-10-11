@@ -146,7 +146,9 @@ Future work
 
 - [Presentation PDF](docs/presentation.pdf)
 - [Architecture diagram](docs/architecture.png)
-- Demo video: add the public-accessible YouTube Unlisted URL after recording.
+- Demo video: [Live Demonstration Video](https://youtu.be/-1J-GBqnc8E
+
+)
 
  Disclaimer
 
